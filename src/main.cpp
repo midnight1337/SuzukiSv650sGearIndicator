@@ -20,7 +20,7 @@ void loop() {
 // // Numer pinu do którego podłaczasz czujnik
 // #define ONEWIRE_PIN 2
 
-// // Adres czujnika
+// // Adres czujnikaa
 // byte address[8] = {0x28, 0xF4, 0x55, 0x56, 0xB5, 0x1, 0x3C, 0x76};
 
 // OneWire onewire(ONEWIRE_PIN);
