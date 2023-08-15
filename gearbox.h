@@ -11,13 +11,13 @@ class Gearbox
 {
     private:
         int m_gear;
-        float m_gearbox_voltage;
+        float m_gear_voltage;
 
     public:
         Gearbox();
         int gear();
-        float gearbox_voltage();
-        void read_gearbox_voltage();
+        float gear_voltage();
+        void read_gear_voltage_from_gearbox();
         void determine_gear();
 };
 

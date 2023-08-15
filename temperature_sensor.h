@@ -9,7 +9,15 @@ Description:
 
 class TemperatureSensor
 {
+    private:
+        float m_temperature;
 
+    public:
+        TemperatureSensor();
+        float temperature();
+        float convert_temperature_to_celcius(float temperature);
+        void read_temperature_from_sensor();
+        
 };
 
 #endif

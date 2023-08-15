@@ -9,7 +9,7 @@
 N: 5.00V
  */
 
-enum GearsVoltageInmV
+enum GearsVoltageInMiliVolts
 {
     first = 136,
     second = 177,
@@ -30,19 +30,19 @@ int Gearbox::gear()
     return m_gear;
 }
 
-float Gearbox::gearbox_voltage()
+float Gearbox::gear_voltage()
 {
-    return m_gearbox_voltage;
+    return m_gear_voltage;
 }
 
-void Gearbox::read_gearbox_voltage()
+void Gearbox::read_gear_voltage_from_gearbox()
 {
-    m_gearbox_voltage = 0; //round(AnalogRead(A1) * 100.00) / 100.00; // round up to 2 decimals
+    m_gear_voltage = 0; //round(AnalogRead(A1) * 100.00) / 100.00; // round up to 2 decimals
 }
 
 void Gearbox::determine_gear()
 {
-    int gearbox_voltage_in_mv = int(m_gearbox_voltage * 100);
+    int gearbox_voltage_in_mv = int(m_gear_voltage * 100);
 
     switch (gearbox_voltage_in_mv)
     {
