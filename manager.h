@@ -1,7 +1,7 @@
 /*
 Author: Kamil Koltowski
 Date: 2023-08-14
-Description:
+Description: a
 */
 #ifndef MANAGER_H
 #define MANAGER_H
