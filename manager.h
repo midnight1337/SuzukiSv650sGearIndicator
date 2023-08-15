@@ -22,7 +22,7 @@ class Manager
         Display display = Display();
 
     public:
-
+        int cpp_version();
 };
 
 #endif
