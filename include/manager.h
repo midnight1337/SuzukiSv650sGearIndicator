@@ -1,29 +1,35 @@
 /*
 Author: Kamil Koltowski
 Date: 2023-08-14
-Description: 
+Description:
 */
 #ifndef MANAGER_H
 #define MANAGER_H
 
+#include <Arduino.h>
 #include "battery.h"
 #include "gearbox.h"
 #include "temperature_sensor.h"
 #include "display.h"
-//#include <Arduino.h>
-
 
 class Manager
 {
-    private:
-        // Battery battery = Battery();
-        // Gearbox gearbox = Gearbox();
-        // TemperatureSensor temperature_sensor = TemperatureSensor();
-        // Display display = Display();
+private:
+    Battery m_battery;
+    Gearbox m_gearbox;
+    TemperatureSensor m_temp_sensor;
+    Display m_display;
 
-    public:
-        Manager();
-        int cpp_version();
+public:
+    Manager();
+    Battery battery();
+    Gearbox gearbox();
+    TemperatureSensor temp_sensor();
+    Display display();
+
+    void run();
+
+    int cpp_version();
 };
 
 #endif

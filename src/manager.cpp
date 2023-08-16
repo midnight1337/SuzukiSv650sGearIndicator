@@ -1,8 +1,29 @@
 #include "../include/manager.h"
 
-
-int Manager::cpp_version()
+Manager::Manager()
 {
-    // std::cout << __cplusplus << std::endl;
-    return 0;
+    m_battery = Battery();
+    m_gearbox = Gearbox();
+    m_temp_sensor = TemperatureSensor();
+    m_display = Display();
+}
+
+Battery Manager::battery()
+{
+    return m_battery;
+}
+
+Gearbox Manager::gearbox()
+{
+    return m_gearbox;
+}
+
+TemperatureSensor Manager::temp_sensor()
+{
+    return m_temp_sensor;
+}
+
+Display Manager::display()
+{
+    return m_display;
 }

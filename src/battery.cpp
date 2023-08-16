@@ -1,10 +1,6 @@
 #include "../include/battery.h"
 
-
-Battery::Battery()
-{
-    
-}
+Battery::Battery() {}
 
 float Battery::voltage()
 {
@@ -13,7 +9,8 @@ float Battery::voltage()
 
 void Battery::read_battery_voltage()
 {
-    float voltage = 1;//round(AnalogRead(A0) * 10 * 100.00) / 100.00; // read analog pin and convert it as it was divided by voltage divider
+    float voltage = 1; // round(AnalogRead(BATTERY_PIN) * 100.00) / 100.00; // read analog pin and convert it as it was divided by voltage divider
+    voltage *= 10;     // voltage has been divided by voltage divider so multiply by 10 to get real value
     m_voltage = voltage;
 }
 
