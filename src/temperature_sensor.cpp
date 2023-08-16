@@ -2,8 +2,6 @@
 
 TemperatureSensor::TemperatureSensor()
 {
-    m_onewire = OneWire(DS18B20_ONE_WIRE_PIN);
-    m_sensor = DS18B20(&m_onewire);
     m_sensor.begin();
     m_sensor.request(m_address);
 }

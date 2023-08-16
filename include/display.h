@@ -13,20 +13,23 @@ Description:
 
 class Display
 {
-private:
-    const uint_8t m_address = {0x3C};
-    Adafruit_SSD1306 m_display = Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+    private:
+        int m_address = 0x3C;
+        Adafruit_SSD1306 m_display = Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
-public:
-    Display();
-    draw_startup_text();
-    draw_current_gear();
-    draw_battery_level();
-    draw_battery_icon();
-    draw_temperature_level();
-    draw_temperature_icon();
+    public:
+        Display();
+        void draw_startup_text(String text);
+        void draw_battery_level(float battery_voltage);
+        void draw_temperature_level(int temperature);
+        void draw_current_gear(int current_gear);
+        void draw_battery_icon();
+        void draw_temperature_icon();
 
-    draw_text();
+        void draw_data(float battery_voltage, int temperature, int current_gear);
+        void draw_icons();
+
+        void clear_display();
 };
 
 #endif
