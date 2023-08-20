@@ -15,21 +15,15 @@ Description:
 class Manager
 {
 private:
-    Battery m_battery;
-    Gearbox m_gearbox;
-    TemperatureSensor m_temp_sensor;
+    Battery m_battery = Battery();
+    Gearbox m_gearbox = Gearbox();
+    TemperatureSensor m_temp_sensor = TemperatureSensor();
     Display m_display;
 
 public:
     Manager();
-    Battery battery();
-    Gearbox gearbox();
-    TemperatureSensor temp_sensor();
-    Display display();
-
     void run();
-
-    int cpp_version();
+    void setup();
 };
 
 #endif

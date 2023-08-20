@@ -14,22 +14,21 @@ Description:
 class Display
 {
     private:
-        int m_address = 0x3C;
-        Adafruit_SSD1306 m_display = Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+        int m_address[1] = {0x3C};
+        // Adafruit_SSD1306 m_display = Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);   // why display behaves very weird with that?
+        Adafruit_SSD1306* m_display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
     public:
         Display();
-        void draw_startup_text(String text);
-        void draw_battery_level(float battery_voltage);
-        void draw_temperature_level(int temperature);
+        void setup_display();
+        void draw_data(int current_gear, float voltage, float temperature);
         void draw_current_gear(int current_gear);
+        void draw_battery_voltage(float voltage);
+        void draw_temperature(float temperature);
         void draw_battery_icon();
         void draw_temperature_icon();
-
-        void draw_data(float battery_voltage, int temperature, int current_gear);
-        void draw_icons();
-
-        void clear_display();
+        void draw_top_text();
+        void draw_startup_text();
 };
 
 #endif

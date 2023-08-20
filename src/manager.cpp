@@ -1,29 +1,16 @@
 #include "../include/manager.h"
 
-Manager::Manager()
+Manager::Manager() {}
+
+void Manager::run()
 {
-    m_battery = Battery();
-    m_gearbox = Gearbox();
-    m_temp_sensor = TemperatureSensor();
-    m_display = Display();
+    m_temp_sensor.read_temperature_from_sensor();
+    m_display.draw_data(6, 0, m_temp_sensor.temperature());
 }
 
-Battery Manager::battery()
+void Manager::setup()
 {
-    return m_battery;
-}
-
-Gearbox Manager::gearbox()
-{
-    return m_gearbox;
-}
-
-TemperatureSensor Manager::temp_sensor()
-{
-    return m_temp_sensor;
-}
-
-Display Manager::display()
-{
-    return m_display;
+    m_temp_sensor.setup_sensor();
+    m_display.setup_display();
+    m_display.draw_startup_text();
 }
