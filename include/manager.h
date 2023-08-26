@@ -17,7 +17,7 @@ class Manager
 private:
     Battery m_battery{};
     Gearbox m_gearbox{};
-    TemperatureSensor m_temp_sensor{};
+    TemperatureSensor m_temperature_sensor{};
     Display m_display{};
 
 public:

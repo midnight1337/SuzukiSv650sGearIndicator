@@ -18,6 +18,7 @@ public:
     Gearbox();
     int current_gear();
     float current_gear_voltage();
+    void read_gear();
     void read_gear_voltage_from_gearbox();
     void determine_gear();
 };

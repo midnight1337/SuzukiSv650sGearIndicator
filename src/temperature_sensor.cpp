@@ -13,7 +13,7 @@ float TemperatureSensor::temperature()
     return m_temperature;
 }
 
-void TemperatureSensor::read_temperature_from_sensor()
+void TemperatureSensor::read_temperature()
 {
     if (!m_sensor.available())
     {

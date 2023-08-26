@@ -7,23 +7,13 @@ float Battery::voltage()
     return m_voltage;
 }
 
-void Battery::read_battery_voltage()
+void Battery::read_voltage()
 {
-    float voltage = 1; // round(AnalogRead(BATTERY_PIN) * 100.00) / 100.00; // read analog pin and convert it as it was divided by voltage divider
-    voltage *= 10;     // voltage has been divided by voltage divider so multiply by 10 to get real value
-    m_voltage = voltage;
-}
-
-// if battery condition under threshold, trigger display to change color to RED
-bool Battery::check_battery_condition()
-{
-    if (m_voltage <= BATTERRY_LOW_LEVEL)
-    {
-        m_isBatteryConditionGood = false;
-    }
-    else
-    {
-        m_isBatteryConditionGood = true;
-    }
-    return m_isBatteryConditionGood;
+    /*
+        Atmega328P has 10bit ADC operating on voltage level 0-5V (VCC), which is 2^10 -> 0-1023 possible values
+    */
+    int read_adc = analogRead(BATTERY_PIN);
+    float convert_adc_to_voltage = (read_adc *  5.0)  / 1023.0;
+    float calculate_source_voltage = (convert_adc_to_voltage * (R_TOP + R_BOTTOM)) / R_BOTTOM;
+    m_voltage = calculate_source_voltage;
 }

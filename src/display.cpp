@@ -23,13 +23,13 @@ void Display::draw_startup_text()
     m_display.display();
 }
 
-void Display::draw_data(int current_gear, float voltage, float temperature)
+void Display::draw_data(int current_gear, float battery_voltage, float temperature)
 {
     draw_top_text();
     draw_battery_icon();
     draw_temperature_icon();
 
-    draw_battery_voltage(voltage);
+    draw_battery_voltage(battery_voltage);
     draw_temperature(temperature);
     draw_current_gear(current_gear);
 
@@ -50,21 +50,23 @@ void Display::draw_current_gear(int current_gear)
 
 void Display::draw_battery_voltage(float voltage)
 {   
-    String convert_voltage = String(voltage, 1) + VOLTAGE_SIGN;   // convert to one decimal
+    // I think conmverted variable with SIGN char should be converted in base class, current solution leads to unexpected display behavior such as
+    // displaying votlage level as 5.0VV instead of 5.0V (second V is not cleared display will whow it once)
+    String convert_voltage_to_one_decimal = String(voltage, 1) + VOLTAGE_SIGN;
     m_display.setTextSize(2);
     m_display.setTextColor(WHITE, BLACK);
     m_display.setCursor(68, 18);
-    m_display.println(convert_voltage);
+    m_display.println(convert_voltage_to_one_decimal);
     m_display.setCursor(68, 44);
 }
 
 void Display::draw_temperature(float temperature)
 {   
-    String convert_temperature = String(temperature, 1);   // convert to one decimal
+    String convert_temperature_to_one_decimal = String(temperature, 1);
     m_display.setTextSize(2);
     m_display.setTextColor(WHITE, BLACK);
     m_display.setCursor(68, 44);
-    m_display.println(convert_temperature);
+    m_display.println(convert_temperature_to_one_decimal);
     m_display.drawCircle(120, 44, 2, WHITE);
 }
 
@@ -77,9 +79,9 @@ void Display::draw_battery_icon()
     m_display.drawRect(coordinate_x + 2, coordinate_y - 2, 4, 2, WHITE);
     m_display.drawRect(coordinate_x + 14, coordinate_y - 2, 4, 2, WHITE);
 
-    m_display.drawLine(coordinate_x + 2, coordinate_y + 7, coordinate_x + 6, coordinate_y + 7, WHITE);     // -
-    m_display.drawLine(coordinate_x + 13, coordinate_y + 7, coordinate_x + 17, coordinate_y + 7, WHITE);     // + . -
-    m_display.drawLine(coordinate_x + 15, coordinate_y + 5, coordinate_x + 15, coordinate_y + 9, WHITE);     // + . |
+    m_display.drawLine(coordinate_x + 2, coordinate_y + 7, coordinate_x + 6, coordinate_y + 7, WHITE);
+    m_display.drawLine(coordinate_x + 13, coordinate_y + 7, coordinate_x + 17, coordinate_y + 7, WHITE);
+    m_display.drawLine(coordinate_x + 15, coordinate_y + 5, coordinate_x + 15, coordinate_y + 9, WHITE);
 
     /* // Draws on the top
     m_display.drawRect(50, 2, 20, 14, WHITE);

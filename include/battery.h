@@ -3,6 +3,7 @@ Author: Kamil Koltowski
 Date: 2023-08-14
 Description: Battery class represents a motorbike battery
 */
+#include <Arduino.h>
 #include "defined_variables.h"
 
 #ifndef BATTERY_H
@@ -17,8 +18,7 @@ private:
 public:
     Battery();
     float voltage();
-    bool check_battery_condition();
-    void read_battery_voltage();
+    void read_voltage();
 };
 
 #endif

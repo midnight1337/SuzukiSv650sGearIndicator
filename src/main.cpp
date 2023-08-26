@@ -1,5 +1,11 @@
 #include <Arduino.h>
 #include "manager.h"
+/*
+Title: Suzuki SV650S gear indicator
+Author: midnight1337
+Date:
+*/
+
 Manager manager{};
 
 void setup() 
@@ -11,5 +17,5 @@ void setup()
 void loop() 
 {
   manager.run();
-  delay(1000);
+  delay(RUN_LOOP_TIME);
 }

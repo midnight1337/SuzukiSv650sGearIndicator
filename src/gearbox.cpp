@@ -35,13 +35,19 @@ float Gearbox::current_gear_voltage()
     return m_current_gear_voltage;
 }
 
+void Gearbox::read_gear()
+{
+    read_gear_voltage_from_gearbox();
+    determine_gear();
+}
+
 void Gearbox::read_gear_voltage_from_gearbox()
 {
-    m_current_gear_voltage = 0; // round(AnalogRead(A1) * 100.00) / 100.00; // round up to 2 decimals
+    m_current_gear_voltage = round(analogRead(A1) * 100.00) / 100.00; // round up to 2 decimals
 }
 
 void Gearbox::determine_gear()
-{
+{   
     int gearbox_voltage_in_mv = int(m_current_gear_voltage * 100);
 
     switch (gearbox_voltage_in_mv)
