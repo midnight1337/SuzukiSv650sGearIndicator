@@ -15,10 +15,10 @@ Description:
 class Manager
 {
 private:
-    Battery m_battery = Battery();
-    Gearbox m_gearbox = Gearbox();
-    TemperatureSensor m_temp_sensor = TemperatureSensor();
-    Display m_display;
+    Battery m_battery{};
+    Gearbox m_gearbox{};
+    TemperatureSensor m_temp_sensor{};
+    Display m_display{};
 
 public:
     Manager();

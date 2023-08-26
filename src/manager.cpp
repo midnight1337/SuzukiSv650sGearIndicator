@@ -2,10 +2,12 @@
 
 Manager::Manager() {}
 
+int dupa = 0;
 void Manager::run()
 {
     m_temp_sensor.read_temperature_from_sensor();
-    m_display.draw_data(6, 0, m_temp_sensor.temperature());
+    m_display.draw_data(dupa, 0, m_temp_sensor.temperature());
+    dupa >= 6 ? dupa = 0 : dupa++;
 }
 
 void Manager::setup()

@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "manager.h"
-Manager manager = Manager();
+Manager manager{};
 
 void setup() 
 {

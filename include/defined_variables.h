@@ -14,4 +14,13 @@
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 #define OLED_RESET -1
 
+#define STARTUP_TIME 2000
+#define STARTUP_TEXT "BOOTING"
+
+#define GEAR_N "N"
+#define VOLTAGE_SIGN "V"
+#define TEMPERATURE_SIGN "TEMP"
+#define SUZUKI_TITLE "SUZUKI SV650S"
+#define GITHUB "github/midnight1337"
+
 #endif

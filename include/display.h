@@ -14,9 +14,8 @@ Description:
 class Display
 {
     private:
-        int m_address[1] = {0x3C};
-        // Adafruit_SSD1306 m_display = Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);   // why display behaves very weird with that?
-        Adafruit_SSD1306* m_display = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+        const int m_address[1] = {0x3C};
+        Adafruit_SSD1306 m_display{SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1};
 
     public:
         Display();
