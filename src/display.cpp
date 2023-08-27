@@ -1,6 +1,6 @@
 #include "display.h"
 
-Display::Display() {}
+Display::Display(): m_display{SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1} {}
 
 void Display::setup_display() // why initializing display fails allocation when put in Display contructor?!
 {

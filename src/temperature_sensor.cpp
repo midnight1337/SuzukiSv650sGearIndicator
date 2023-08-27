@@ -1,6 +1,6 @@
 #include "../include/temperature_sensor.h"
 
-TemperatureSensor::TemperatureSensor() {}
+TemperatureSensor::TemperatureSensor(): m_onewire{DS18B20_ONE_WIRE_PIN}, m_sensor{&m_onewire} {}
 
 void TemperatureSensor::setup_sensor()
 {

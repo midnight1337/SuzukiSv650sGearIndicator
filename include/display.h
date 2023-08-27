@@ -15,7 +15,7 @@ class Display
 {
     private:
         const int m_address[1] = {0x3C};
-        Adafruit_SSD1306 m_display{SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1};
+        Adafruit_SSD1306 m_display;
 
     public:
         Display();
