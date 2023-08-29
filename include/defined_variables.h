@@ -13,7 +13,7 @@
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 #define OLED_RESET -1
 
-#define RUN_LOOP_TIME 1000
+#define MAIN_LOOP_TIME 1000
 #define STARTUP_TIME 2000
 #define STARTUP_TEXT "BOOTING"
 
@@ -23,7 +23,7 @@
 #define SUZUKI_TITLE "SUZUKI SV650S"
 #define GITHUB "github/midnight1337"
 
-#define R_TOP 46000     // Gearbox voltage divider
+#define R_TOP 46000     // Gearbox voltage
 #define R_BOTTOM 4600
 
 #endif

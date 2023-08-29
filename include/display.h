@@ -10,7 +10,7 @@ class Display
 {
     private:
         Adafruit_SSD1306 m_display;
-        const int m_address[1] = {0x3C};
+        const uint8_t m_address[1] = {0x3C};
 
         void draw_current_gear(int gear);
         void draw_battery_voltage(float voltage);

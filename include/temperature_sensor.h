@@ -1,8 +1,3 @@
-/*
-Author: Kamil Koltowski
-Date: 2023-08-15
-Description:
-*/
 #include <Arduino.h>
 #include <OneWire.h>
 #include <DS18B20.h>

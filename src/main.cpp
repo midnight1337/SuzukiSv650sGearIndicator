@@ -1,21 +1,23 @@
-#include <Arduino.h>
-#include "manager.h"
 /*
 Title: Suzuki SV650S gear indicator
 Author: midnight1337
 Date:
+TODO: ISR on gearbox pin, add threshold to determining gears, check debouncing by changing gear in motorbike
 */
+
+#include <Arduino.h>
+#include "manager.h"
 
 Manager manager{};
 
-void setup() 
+void setup()
 {
   Serial.begin(115200);
   manager.setup();
 }
 
-void loop() 
+void loop()
 {
   manager.run();
-  delay(RUN_LOOP_TIME);
+  delay(MAIN_LOOP_TIME);
 }

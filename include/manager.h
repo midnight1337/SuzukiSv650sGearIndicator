@@ -1,11 +1,11 @@
-#ifndef MANAGER_H
-#define MANAGER_H
-
 #include <Arduino.h>
 #include "battery.h"
 #include "gearbox.h"
 #include "temperature_sensor.h"
 #include "display.h"
+
+#ifndef MANAGER_H
+#define MANAGER_H
 
 class Manager
 {
