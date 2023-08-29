@@ -22,17 +22,12 @@ enum GearsVoltageInMiliVolts
 
 Gearbox::Gearbox()
 {
-    m_current_gear = 0;
+    m_gear = 0;
 }
 
-int Gearbox::current_gear()
+int Gearbox::gear()
 {
-    return m_current_gear;
-}
-
-float Gearbox::current_gear_voltage()
-{
-    return m_current_gear_voltage;
+    return m_gear;
 }
 
 void Gearbox::read_gear()
@@ -43,37 +38,18 @@ void Gearbox::read_gear()
 
 void Gearbox::read_gear_voltage_from_gearbox()
 {
-    m_current_gear_voltage = round(analogRead(A1) * 100.00) / 100.00; // round up to 2 decimals
+    m_gear_voltage = round(analogRead(A1) * 100.00) / 100.00; // round up to 2 decimals
 }
 
 void Gearbox::determine_gear()
 {   
-    int gearbox_voltage_in_mv = int(m_current_gear_voltage * 100);
+    int gearbox_voltage_in_mv = int(m_gear_voltage * 100);
 
-    switch (gearbox_voltage_in_mv)
-    {
-    case first:
-        m_current_gear = 1;
-        break;
-    case second:
-        m_current_gear = 2;
-        break;
-    case third:
-        m_current_gear = 3;
-        break;
-    case fourth:
-        m_current_gear = 4;
-        break;
-    case fifth:
-        m_current_gear = 5;
-        break;
-    case sixth:
-        m_current_gear = 6;
-        break;
-    case neutral:
-        m_current_gear = 0;
-        break;
-    default:
-        break;
-    }
+    if (gearbox_voltage_in_mv >= neutral) {m_gear = 0;}
+    else if (gearbox_voltage_in_mv <= first) {m_gear = 1;}
+    else if (gearbox_voltage_in_mv > first && gearbox_voltage_in_mv <= second) {m_gear = 2;}
+    else if (gearbox_voltage_in_mv > second && gearbox_voltage_in_mv <= third) {m_gear = 3;}
+    else if (gearbox_voltage_in_mv > third && gearbox_voltage_in_mv <= fourth) {m_gear = 4;}
+    else if (gearbox_voltage_in_mv > fourth && gearbox_voltage_in_mv <= fifth) {m_gear = 5;}
+    else if (gearbox_voltage_in_mv > fifth && gearbox_voltage_in_mv <= sixth) {m_gear = 6;}
 }

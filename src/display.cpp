@@ -23,7 +23,7 @@ void Display::draw_startup_text()
     m_display.display();
 }
 
-void Display::draw_data(int current_gear, float battery_voltage, float temperature)
+void Display::draw_data(int gear, float battery_voltage, float temperature)
 {
     draw_top_text();
     draw_battery_icon();
@@ -31,15 +31,15 @@ void Display::draw_data(int current_gear, float battery_voltage, float temperatu
 
     draw_battery_voltage(battery_voltage);
     draw_temperature(temperature);
-    draw_current_gear(current_gear);
+    draw_current_gear(gear);
 
     m_display.display();
 }
 
-void Display::draw_current_gear(int current_gear)
+void Display::draw_current_gear(int gear)
 {   
     String convert_gear;
-    current_gear == 0 ? convert_gear = GEAR_N : convert_gear = String(current_gear);
+    gear == 0 ? convert_gear = GEAR_N : convert_gear = String(gear);
 
     m_display.setTextSize(7);
     m_display.setTextColor(WHITE, BLACK);

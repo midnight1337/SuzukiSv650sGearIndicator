@@ -23,7 +23,7 @@
 #define SUZUKI_TITLE "SUZUKI SV650S"
 #define GITHUB "github/midnight1337"
 
-#define R_TOP 46000
+#define R_TOP 46000     // Gearbox voltage divider
 #define R_BOTTOM 4600
 
 #endif

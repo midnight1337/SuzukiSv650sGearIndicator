@@ -1,8 +1,3 @@
-/*
-Author: Kamil Koltowski
-Date: 2023-08-14
-Description: Battery class represents a motorbike battery
-*/
 #include <Arduino.h>
 #include "defined_variables.h"
 
@@ -13,7 +8,9 @@ class Battery
 {
 private:
     float m_voltage;
-    bool m_isBatteryConditionGood;
+
+    int read_battery_voltage_from_adc();
+    void convert_voltage(int voltage_from_adc);
 
 public:
     Battery();

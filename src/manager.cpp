@@ -7,7 +7,7 @@ void Manager::run()
     m_battery.read_voltage();
     // m_gearbox.read_gear();
     m_temperature_sensor.read_temperature();
-    m_display.draw_data(0, m_battery.voltage(), m_temperature_sensor.temperature());
+    m_display.draw_data(m_gearbox.gear(), m_battery.voltage(), m_temperature_sensor.temperature());
 }
 
 void Manager::setup()

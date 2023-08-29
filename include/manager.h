@@ -1,8 +1,3 @@
-/*
-Author: Kamil Koltowski
-Date: 2023-08-14
-Description:
-*/
 #ifndef MANAGER_H
 #define MANAGER_H
 
