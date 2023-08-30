@@ -39,13 +39,14 @@ void Gearbox::read_gear()
 void Gearbox::read_gear_voltage_from_gearbox()
 {
     int adc_value = analogRead(GEARBOX_PIN);
-    convert_adc_value_to_voltage(adc_value);
+    m_gear_voltage = convert_adc_value_to_voltage(adc_value);
 }
 
-void Gearbox::convert_adc_value_to_voltage(int adc_value)
+float Gearbox::convert_adc_value_to_voltage(int adc_value)
 {
-    float convert_adc_to_voltage = (adc_value *  5.0)  / 1023.0;
-    m_gear_voltage = round(convert_adc_to_voltage * 100.00) / 100.00; // round up to 2 decimals
+    float adc_value_to_voltage = (adc_value *  5.0)  / 1023.0;
+    float round_up_voltage_to_two_decimals = round(adc_value_to_voltage * 100.00) / 100.00;
+    return round_up_voltage_to_two_decimals;
 }
 
 void Gearbox::determine_gear()

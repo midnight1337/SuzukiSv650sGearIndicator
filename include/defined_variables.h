@@ -23,7 +23,10 @@
 #define SUZUKI_TITLE "SUZUKI SV650S"
 #define GITHUB "github/midnight1337"
 
-#define R_TOP 46000     // Gearbox voltage
+#define R_TOP 46000     // Resistor forming voltage divider for gearbox
 #define R_BOTTOM 4600
+
+#define VCC 5.0
+#define MAX_SAMPLES 1023.0
 
 #endif

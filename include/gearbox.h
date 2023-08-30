@@ -10,7 +10,7 @@ private:
     float m_gear_voltage;
 
     void read_gear_voltage_from_gearbox();
-    void convert_adc_value_to_voltage(int adc_value);
+    float convert_adc_value_to_voltage(int adc_value);
     void determine_gear();
 
 public:
