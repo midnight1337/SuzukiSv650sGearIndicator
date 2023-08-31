@@ -19,7 +19,9 @@
 
 #define GEAR_N "N"
 #define VOLTAGE_SIGN "V"
-#define TEMPERATURE_SIGN "TEMP"
+#define TEMPERATURE_SIGN "C"
+#define TEMPERATURE_TITLE "T:"
+#define TEMPERATURE_ERROR "ERR"
 #define SUZUKI_TITLE "SUZUKI SV650S"
 #define GITHUB "github/midnight1337"
 

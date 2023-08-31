@@ -23,51 +23,45 @@ void Display::draw_startup_text()
     m_display.display();
 }
 
-void Display::draw_data(int gear, float battery_voltage, float temperature)
+void Display::draw_data(String* data)
 {
+    // Serial.println((unsigned long)&data[0]); // show memory address
+
     draw_top_text();
     draw_battery_icon();
     draw_temperature_icon();
-
-    draw_battery_voltage(battery_voltage);
-    draw_temperature(temperature);
-    draw_current_gear(gear);
+    draw_current_gear(data[0]);
+    draw_battery_voltage(data[1]);
+    draw_temperature(data[2]);
 
     m_display.display();
 }
 
-void Display::draw_current_gear(int gear)
+void Display::draw_current_gear(String& gear)
 {   
-    String convert_gear;
-    gear == 0 ? convert_gear = GEAR_N : convert_gear = String(gear);
-
     m_display.setTextSize(7);
     m_display.setTextColor(WHITE, BLACK);
     m_display.setCursor(0, 16);
-    m_display.println(convert_gear);
-    m_display.display();
+    m_display.println(gear);
+    // m_display.display();     // isr
 }
 
-void Display::draw_battery_voltage(float voltage)
+void Display::draw_battery_voltage(String& battery_voltage)
 {   
-    // I think conmverted variable with SIGN char should be converted in base class, current solution leads to unexpected display behavior such as
-    // displaying votlage level as 5.0VV instead of 5.0V (second V is not cleared display will whow it once)
-    String convert_voltage_to_one_decimal = String(voltage, 1) + VOLTAGE_SIGN;
+    m_display.fillRect(68, 18, 100, 30, BLACK);   // Clear display buffer (get rid of unwanted signs that ain't be overrited by new text)
     m_display.setTextSize(2);
     m_display.setTextColor(WHITE, BLACK);
     m_display.setCursor(68, 18);
-    m_display.println(convert_voltage_to_one_decimal);
-    m_display.setCursor(68, 44);
+    m_display.println(battery_voltage);
 }
 
-void Display::draw_temperature(float temperature)
+void Display::draw_temperature(String& temperature)
 {   
-    String convert_temperature_to_one_decimal = String(temperature, 1);
+    m_display.fillRect(68, 44, 100, 30, BLACK);   // x,y,width,height,color
     m_display.setTextSize(2);
     m_display.setTextColor(WHITE, BLACK);
     m_display.setCursor(68, 44);
-    m_display.println(convert_temperature_to_one_decimal);
-    m_display.drawCircle(120, 44, 2, WHITE);
+    m_display.println(temperature);
 }
 
 void Display::draw_battery_icon()
@@ -95,10 +89,10 @@ void Display::draw_battery_icon()
 
 void Display::draw_temperature_icon()
 {
-    m_display.setTextSize(1);
+    m_display.setTextSize(2);
     m_display.setTextColor(WHITE, BLACK);
-    m_display.setCursor(42, 48);
-    m_display.println(TEMPERATURE_SIGN);
+    m_display.setCursor(44, 44);
+    m_display.println(TEMPERATURE_TITLE);
 }
 
 void Display::draw_top_text()
@@ -109,4 +103,9 @@ void Display::draw_top_text()
     m_display.println(SUZUKI_TITLE);
     m_display.setCursor(6, 8);
     m_display.println(GITHUB);
+}
+
+void Display::test()
+{
+    return;
 }
