@@ -43,7 +43,6 @@ void Display::draw_current_gear(String& gear)
     m_display.setTextColor(WHITE, BLACK);
     m_display.setCursor(0, 16);
     m_display.println(gear);
-    // m_display.display();     // isr
 }
 
 void Display::draw_battery_voltage(String& battery_voltage)
@@ -103,9 +102,4 @@ void Display::draw_top_text()
     m_display.println(SUZUKI_TITLE);
     m_display.setCursor(6, 8);
     m_display.println(GITHUB);
-}
-
-void Display::test()
-{
-    return;
 }

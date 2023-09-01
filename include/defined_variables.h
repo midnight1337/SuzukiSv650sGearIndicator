@@ -31,4 +31,7 @@
 #define VCC 5.0
 #define MAX_SAMPLES 1023.0
 
+#define LOW_TEMPERATURE_THRESHOLD 5
+#define LOW_BATTERY_THRESHOLD 12
+
 #endif

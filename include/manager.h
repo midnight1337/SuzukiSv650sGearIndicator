@@ -14,7 +14,6 @@ private:
     Gearbox m_gearbox{};
     TemperatureSensor m_temperature_sensor{};
     Display m_display{};
-    
     String m_data[3];
     void convert_data_to_string(int gear, float battery_voltage, float temperature);
     void print_data();

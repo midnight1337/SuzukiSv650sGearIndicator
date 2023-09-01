@@ -21,8 +21,8 @@ void Manager::setup()
 void Manager::convert_data_to_string(int gear, float battery_voltage, float temperature)
 {
     String convert_gear = (gear == 0) ? GEAR_N : String(gear);
-    String convert_battery_voltage = String(battery_voltage, 1);
-    String convert_temperature = (temperature == -273) ? TEMPERATURE_ERROR : String(temperature, 1);
+    String convert_battery_voltage = String(battery_voltage, 1) + VOLTAGE_SIGN;
+    String convert_temperature = (temperature == -273) ? TEMPERATURE_ERROR : String(temperature, 1) + TEMPERATURE_SIGN;
 
     m_data[0] = convert_gear;
     m_data[1] = convert_battery_voltage;

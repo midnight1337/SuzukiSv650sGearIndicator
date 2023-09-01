@@ -10,7 +10,6 @@ Clear data on screen with fillrect
 Figure out wtf is wrong with converting_data_in_string and joining with another String
 When battery votlage below threshold, or Temperature below safe temp, show battery or temp icon on yellow part of screen
 */
-
 #include <Arduino.h>
 #include "manager.h"
 

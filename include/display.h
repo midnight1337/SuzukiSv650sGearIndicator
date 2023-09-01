@@ -21,10 +21,9 @@ class Display
 
     public:
         Display();
+        void draw_data(String* data);
         void setup_display();
         void draw_startup_text();
-        void draw_data(String* data);
-        void test();
 };
 
 #endif
