@@ -20,6 +20,17 @@ enum GearsVoltageInMiliVolts
     neutral = 500
 };
 
+// enum class GearsVoltageInMiliVoltsBinary
+// {
+//     first = 0B10001000,
+//     second = 0B10110001,
+//     third = 0B11111001,
+//     fourth = 0B101000011,
+//     fifth = 0B110011010,
+//     sixth = 0B111000111,
+//     neutral = 0B111110100
+// };
+
 Gearbox::Gearbox()
 {
     m_gear = 0;
@@ -28,6 +39,11 @@ Gearbox::Gearbox()
 int Gearbox::gear()
 {
     return m_gear;
+}
+
+float Gearbox::gear_voltage()
+{
+    return m_gear_voltage;
 }
 
 void Gearbox::read_gear()

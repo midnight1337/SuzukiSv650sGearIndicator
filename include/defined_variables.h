@@ -9,12 +9,12 @@
 
 #define BATTERRY_LOW_LEVEL 12
 
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define SCREEN_WIDTH 128U // OLED display width, in pixels
+#define SCREEN_HEIGHT 64U // OLED display height, in pixels
 #define OLED_RESET -1
 
-#define MAIN_LOOP_TIME 1000
-#define STARTUP_TIME 2000
+#define MAIN_LOOP_TIME 1000U
+#define STARTUP_TIME 2000U
 #define STARTUP_TEXT "BOOTING"
 
 #define GEAR_N "N"
@@ -25,13 +25,13 @@
 #define SUZUKI_TITLE "SUZUKI SV650S"
 #define GITHUB "github/midnight1337"
 
-#define R_TOP 46000     // Resistor forming voltage divider for gearbox
-#define R_BOTTOM 4600
+#define R_TOP 46000U     // Resistor forming voltage divider for gearbox
+#define R_BOTTOM 4600U
 
-#define VCC 5.0
-#define MAX_SAMPLES 1023.0
+#define VCC 5.0f
+#define MAX_SAMPLES 1023.0f
 
-#define LOW_TEMPERATURE_THRESHOLD 5
-#define LOW_BATTERY_THRESHOLD 12
+#define LOW_TEMPERATURE_THRESHOLD 5U
+#define LOW_BATTERY_THRESHOLD 12U
 
 #endif

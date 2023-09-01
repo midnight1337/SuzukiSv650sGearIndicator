@@ -16,6 +16,7 @@ private:
 public:
     Gearbox();
     int gear();
+    float gear_voltage();
     void read_gear();
 };
 

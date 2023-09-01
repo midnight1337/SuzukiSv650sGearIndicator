@@ -29,11 +29,22 @@ void Manager::convert_data_to_string(int gear, float battery_voltage, float temp
     m_data[2] = convert_temperature;
 }
 
+void Manager::setup_port_registers()
+{
+}
+
+void Manager::setup_adc_registers()
+{
+    // ADCSRA = bit(ADEN);                             // turn ADC on
+    // ADCSRA |= bit(ADPS0) | bit(ADPS1) | bit(ADPS2); // Prescaler of 128
+    // ADMUX = bit(REFS0) | (adcPin & 0x07);           // AVcc and select input port
+}
+
 void Manager::print_data()
 {
     Serial.println("start print data");
     for (int i = 0; i < 3; i++)
-    {   
+    {
         Serial.print("DATA: ");
         Serial.println(m_data[i]);
         Serial.println((unsigned long)&m_data[i], HEX);
@@ -42,8 +53,8 @@ void Manager::print_data()
 }
 
 // Check type of variable
-inline const char * typeStr (int   var) { return " int "; }
-inline const char * typeStr (long  var) { return " long "; }
-inline const char * typeStr (float var) { return " float "; }
-inline const char * typeStr (const char *var) { return " char "; }
-inline const char * typeStr (String var) { return " string "; }
+inline const char *typeStr(int var) { return " int "; }
+inline const char *typeStr(long var) { return " long "; }
+inline const char *typeStr(float var) { return " float "; }
+inline const char *typeStr(const char *var) { return " char "; }
+inline const char *typeStr(String var) { return " string "; }
