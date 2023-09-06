@@ -13,7 +13,7 @@ void Battery::read_voltage()
     m_voltage = convert_adc_value_to_voltage(adc_value);
 }
 
-float Battery::convert_adc_value_to_voltage(int adc_value)
+float Battery::convert_adc_value_to_voltage(const int& adc_value)
 {
     float adc_value_to_voltage = (adc_value *  VCC)  / MAX_SAMPLES;
     float source_voltage = (adc_value_to_voltage * (R_TOP + R_BOTTOM)) / R_BOTTOM;

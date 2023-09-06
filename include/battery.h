@@ -9,7 +9,7 @@ class Battery
 private:
     float m_voltage;
 
-    float convert_adc_value_to_voltage(int adc_value);
+    float convert_adc_value_to_voltage(const int& adc_value);
 
 public:
     Battery();

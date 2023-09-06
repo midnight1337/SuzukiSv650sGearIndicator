@@ -16,7 +16,7 @@ private:
     Display m_display{};
     String m_data[3];
     
-    void convert_data_to_string(int gear, float battery_voltage, float temperature);
+    void convert_data_to_string(const int gear, const float battery_voltage, const float temperature);
     void print_data();
 
 public:

@@ -8,7 +8,7 @@ void Manager::run()
     m_battery.read_voltage();
     m_temperature_sensor.read_temperature();
     convert_data_to_string(m_gearbox.gear(), m_battery.voltage(), m_temperature_sensor.temperature());
-    m_display.draw_data(m_data);
+    m_display.draw_data(m_data[0], m_data[1], m_data[2]);
 }
 
 void Manager::setup()
@@ -18,7 +18,7 @@ void Manager::setup()
     m_display.draw_startup_text();
 }
 
-void Manager::convert_data_to_string(int gear, float battery_voltage, float temperature)
+void Manager::convert_data_to_string(const int gear, const float battery_voltage, const float temperature)
 {
     String convert_gear = (gear == 0) ? GEAR_N : String(gear);
     String convert_battery_voltage = String(battery_voltage, 1) + VOLTAGE_SIGN;

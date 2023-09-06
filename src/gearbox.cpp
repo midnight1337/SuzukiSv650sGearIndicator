@@ -58,7 +58,7 @@ void Gearbox::read_gear_voltage_from_gearbox()
     m_gear_voltage = convert_adc_value_to_voltage(adc_value);
 }
 
-float Gearbox::convert_adc_value_to_voltage(int adc_value)
+float Gearbox::convert_adc_value_to_voltage(const int& adc_value)
 {
     float adc_value_to_voltage = (adc_value *  5.0)  / 1023.0;
     float round_up_voltage_to_two_decimals = round(adc_value_to_voltage * 100.00) / 100.00;

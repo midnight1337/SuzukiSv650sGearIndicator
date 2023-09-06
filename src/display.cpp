@@ -23,21 +23,21 @@ void Display::draw_startup_text()
     m_display.display();
 }
 
-void Display::draw_data(String* data)
+void Display::draw_data(const String& gear, const String& battery_voltage, const String& temperature)
 {
     // Serial.println((unsigned long)&data[0]); // show memory address
 
     draw_top_text();
     draw_battery_icon();
     draw_temperature_icon();
-    draw_current_gear(data[0]);
-    draw_battery_voltage(data[1]);
-    draw_temperature(data[2]);
+    draw_current_gear(gear);
+    draw_battery_voltage(battery_voltage);
+    draw_temperature(temperature);
 
     m_display.display();
 }
 
-void Display::draw_current_gear(String& gear)
+void Display::draw_current_gear(const String& gear)
 {   
     m_display.setTextSize(7);
     m_display.setTextColor(WHITE, BLACK);
@@ -45,7 +45,7 @@ void Display::draw_current_gear(String& gear)
     m_display.println(gear);
 }
 
-void Display::draw_battery_voltage(String& battery_voltage)
+void Display::draw_battery_voltage(const String& battery_voltage)
 {   
     m_display.fillRect(68, 18, 100, 30, BLACK);   // Clear display buffer (get rid of unwanted signs that ain't be overrited by new text)
     m_display.setTextSize(2);
@@ -54,7 +54,7 @@ void Display::draw_battery_voltage(String& battery_voltage)
     m_display.println(battery_voltage);
 }
 
-void Display::draw_temperature(String& temperature)
+void Display::draw_temperature(const String& temperature)
 {   
     m_display.fillRect(68, 44, 100, 30, BLACK);   // x,y,width,height,color
     m_display.setTextSize(2);
