@@ -21,11 +21,11 @@
 #define VOLTAGE_SIGN "V"
 #define TEMPERATURE_SIGN "C"
 #define TEMPERATURE_TITLE "T:"
-#define TEMPERATURE_ERROR "ERR"
+#define READ_ERROR "ERR"
 #define SUZUKI_TITLE "SUZUKI SV650S"
 #define GITHUB "github/midnight1337"
 
-#define R_TOP 46000U     // Resistor forming voltage divider for gearbox
+#define R_TOP 46300U     // Resistor forming voltage divider for gearbox
 #define R_BOTTOM 4600U
 
 #define VCC 5.0f

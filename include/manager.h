@@ -14,10 +14,9 @@ private:
     Gearbox m_gearbox{};
     TemperatureSensor m_temperature_sensor{};
     Display m_display{};
-    String m_data[3];
+    char m_data[3][8];  // 2D char array of arrays, 3 arrays 8 characters each
     
-    void convert_data_to_string(const int gear, const float battery_voltage, const float temperature);
-    void print_data();
+    void convert_data_to_char_array(const int& gear, const float& battery_voltage, const float& temperature);
 
 public:
     Manager();

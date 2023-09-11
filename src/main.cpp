@@ -11,18 +11,20 @@ When battery votlage below threshold, or Temperature below safe temp, show batte
 #include <Arduino.h>
 #include "manager.h"
 
-Manager manager{};
 
-void setup()
+int main()
 {
+  init();
   Serial.begin(115200);
+  
+  Manager manager{};
   manager.setup();
-}
 
-void loop()
-{
-  manager.run();
-  delay(MAIN_LOOP_TIME);
+  while (true)
+  {
+    manager.run();
+    delay(MAIN_LOOP_TIME);
+  }
 }
 
 // volatile int adcReading;
