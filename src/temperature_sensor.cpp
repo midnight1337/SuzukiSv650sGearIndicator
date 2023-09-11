@@ -2,7 +2,7 @@
 
 TemperatureSensor::TemperatureSensor(): m_onewire{DS18B20_ONE_WIRE_PIN}, m_sensor{&m_onewire} 
 {
-    m_temperature = 0.0;
+    m_temperature = 0.0f;
 }
 
 void TemperatureSensor::setup_sensor()

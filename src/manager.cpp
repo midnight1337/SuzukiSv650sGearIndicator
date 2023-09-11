@@ -7,8 +7,9 @@ void Manager::run()
     m_gearbox.read_gear();
     m_battery.read_voltage();
     m_temperature_sensor.read_temperature();
-    convert_data_to_char_array(m_gearbox.gear(), m_battery.voltage(), m_temperature_sensor.temperature());
-    m_display.draw_data(m_data[0], m_data[1], m_data[2]);   // pass pointer to a first character of an array
+    convert_data_to_char_array_and_check_for_warning(m_gearbox.gear(), m_battery.voltage(), m_temperature_sensor.temperature());
+
+    m_display.draw_data(m_display_data[0], m_display_data[1], m_display_data[2], m_warning_data[0], m_warning_data[1]);
 }
 
 void Manager::setup()
@@ -18,21 +19,29 @@ void Manager::setup()
     m_display.draw_startup_text();
 }
 
-void Manager::convert_data_to_char_array(const int& gear, const float& battery_voltage, const float& temperature)
+void Manager::convert_data_to_char_array_and_check_for_warning(const uint8_t& gear, const float& battery_voltage, const float& temperature)
 {
-    String convert_gear = (gear == 0) ? GEAR_N : String(gear);
-    String convert_battery_voltage = (battery_voltage > 50) ? READ_ERROR : String(battery_voltage, 1) + VOLTAGE_SIGN;
-    String convert_temperature = (temperature == -273) ? READ_ERROR : String(temperature, 1) + TEMPERATURE_SIGN;
+    String convert_gear = (gear == GEAR_NEUTRAL_VALUE) ? GEAR_N : String(gear);
+    String convert_battery_voltage = (battery_voltage > BATTERY_READ_ERORR_VALUE) ? READ_ERROR : String(battery_voltage, 1) + VOLTAGE_SIGN;
+    String convert_temperature = (temperature == TEMPERATURE_ERROR_VALUE) ? READ_ERROR : String(temperature, 1) + TEMPERATURE_SIGN;
 
     String str_data[3] = {convert_gear, convert_battery_voltage, convert_temperature};
     
-    for (int i = 0; i < 3; i++)
+    for (uint8_t i = 0; i < 3; i++)
     {
-        int str_len = str_data[i].length() + 1;    // +1 extra for null termination character
+        uint8_t str_len = str_data[i].length() + 1;    // +1 extra for null termination character
         char str_buffer[str_len];
         str_data[i].toCharArray(str_buffer, str_len);
-        strcpy(m_data[i], str_buffer);
+        strcpy(m_display_data[i], str_buffer);
     }
+
+    check_for_warning(battery_voltage, temperature);
+}
+
+void Manager::check_for_warning(const float& battery_voltage, const float& temperature)
+{
+    m_warning_data[0] = (battery_voltage <= LOW_BATTERY_THRESHOLD || battery_voltage >= BATTERY_READ_ERORR_VALUE) ? true : false;
+    m_warning_data[1] = (temperature <= LOW_TEMPERATURE_THRESHOLD) ? true : false;
 }
 
 void Manager::setup_port_registers()
@@ -58,8 +67,8 @@ void address_of(variable& var)
 }
 
 // Check type of variable
-inline const char *typeStr(int var) { return "int "; }
-inline const char *typeStr(long var) { return "long "; }
-inline const char *typeStr(float var) { return "float "; }
-inline const char *typeStr(const char *var) { return "char "; }
-inline const char *typeStr(String var) { return "string "; }
+inline const char *type_of(int var) { return "int "; }
+inline const char *type_of(long var) { return "long "; }
+inline const char *type_of(float var) { return "float "; }
+inline const char *type_of(const char *var) { return "char "; }
+inline const char *type_of(String var) { return "string "; }

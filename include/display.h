@@ -17,11 +17,13 @@ class Display
         void draw_temperature(const char* temperature);
         void draw_battery_icon();
         void draw_temperature_icon();
-        void draw_top_text();
+        void draw_battery_warning_icon(const bool& battery_warning);
+        void draw_temperature_warning_icon(const bool& temperature_warning);
+        void clear_part_of_display(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
 
     public:
         Display();
-        void draw_data(const char* gear, const char* battery_voltage, const char* temperature);
+        void draw_data(const char* gear, const char* battery_voltage, const char* temperature, const bool& battery_warning, const bool& temperature_warning);
         void setup_display();
         void draw_startup_text();
 };

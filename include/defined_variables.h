@@ -25,13 +25,17 @@
 #define SUZUKI_TITLE "SUZUKI SV650S"
 #define GITHUB "github/midnight1337"
 
-#define R_TOP 46300U     // Resistor forming voltage divider for gearbox
+#define R_TOP 46300U
 #define R_BOTTOM 4600U
 
 #define VCC 5.0f
 #define MAX_SAMPLES 1023.0f
 
+#define LOW_BATTERY_THRESHOLD 4U
 #define LOW_TEMPERATURE_THRESHOLD 5U
-#define LOW_BATTERY_THRESHOLD 12U
+
+#define TEMPERATURE_ERROR_VALUE -273
+#define GEAR_NEUTRAL_VALUE 0U
+#define BATTERY_READ_ERORR_VALUE 20U
 
 #endif

@@ -36,7 +36,7 @@ Gearbox::Gearbox()
     m_gear = 0;
 }
 
-int Gearbox::gear()
+uint8_t Gearbox::gear()
 {
     return m_gear;
 }

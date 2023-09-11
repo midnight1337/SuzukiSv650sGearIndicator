@@ -6,7 +6,7 @@
 class Gearbox
 {
 private:
-    int m_gear;
+    uint8_t m_gear;
     float m_gear_voltage;
 
     void read_gear_voltage_from_gearbox();
@@ -15,7 +15,7 @@ private:
 
 public:
     Gearbox();
-    int gear();
+    uint8_t gear();
     float gear_voltage();
     void read_gear();
 };
