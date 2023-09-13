@@ -32,15 +32,15 @@ void Display::draw_startup_text()
     m_display.display();
 }
 
-void Display::draw_data(const char* gear, const char* battery_voltage, const char* temperature, const bool& battery_warning, const bool& temperature_warning)
+void Display::draw_data(const char (&r_data_buffer)[3][8], const bool (&r_warning_data_buffer)[2])
 {
     draw_battery_icon();
     draw_temperature_icon();
-    draw_current_gear(gear);
-    draw_battery_voltage(battery_voltage);
-    draw_temperature(temperature);
-    draw_battery_warning_icon(battery_warning);
-    draw_temperature_warning_icon(temperature_warning);
+    draw_current_gear(*(r_data_buffer + 0));
+    draw_battery_voltage(*(r_data_buffer + 1));
+    draw_temperature(*(r_data_buffer + 2));
+    draw_battery_warning_icon(*(r_warning_data_buffer + 0));
+    draw_temperature_warning_icon(*(r_warning_data_buffer + 1));
 
     m_display.display();
 }
@@ -55,7 +55,6 @@ void Display::draw_current_gear(const char* gear)
 
 void Display::draw_battery_voltage(const char* battery_voltage)
 {   
-    // m_display.fillRect(68, 18, 100, 30, BLACK);   // Clear display buffer (get rid of unwanted signs that ain't be overrited by new text)
     clear_part_of_display(68, 18, 100, 30);
     m_display.setTextSize(2);
     m_display.setTextColor(WHITE, BLACK);
@@ -65,7 +64,6 @@ void Display::draw_battery_voltage(const char* battery_voltage)
 
 void Display::draw_temperature(const char* temperature)
 {   
-    // m_display.fillRect(68, 44, 100, 30, BLACK);   // x,y,width,height,color
     clear_part_of_display(68, 44, 100, 30);
     m_display.setTextSize(2);
     m_display.setTextColor(WHITE, BLACK);
@@ -125,6 +123,7 @@ void Display::draw_temperature_warning_icon(const bool& temperature_warning)
     m_display.println(TEMPERATURE_TITLE[0]);
 }
 
+/* It's necessary to clear part of screen of changing data as battery voltage or ambient temperature*/
 void Display::clear_part_of_display(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
 {
     m_display.fillRect(x, y, width, height, BLACK);

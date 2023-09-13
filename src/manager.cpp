@@ -7,9 +7,9 @@ void Manager::run()
     m_gearbox.read_gear();
     m_battery.read_voltage();
     m_temperature_sensor.read_temperature();
-    convert_data_to_char_array_and_check_for_warning(m_gearbox.gear(), m_battery.voltage(), m_temperature_sensor.temperature());
-
-    m_display.draw_data(m_display_data[0], m_display_data[1], m_display_data[2], m_warning_data[0], m_warning_data[1]);
+    convert_data();
+    check_warnings();
+    m_display.draw_data(m_data_buffer, m_warning_data_buffer);
 }
 
 void Manager::setup()
@@ -19,8 +19,12 @@ void Manager::setup()
     m_display.draw_startup_text();
 }
 
-void Manager::convert_data_to_char_array_and_check_for_warning(const uint8_t& gear, const float& battery_voltage, const float& temperature)
+void Manager::convert_data()
 {
+    uint8_t gear = m_gearbox.gear();
+    float battery_voltage = m_battery.voltage();
+    float temperature = m_temperature_sensor.temperature();
+
     String convert_gear = (gear == GEAR_NEUTRAL_VALUE) ? GEAR_N : String(gear);
     String convert_battery_voltage = (battery_voltage > BATTERY_READ_ERORR_VALUE) ? READ_ERROR : String(battery_voltage, 1) + VOLTAGE_SIGN;
     String convert_temperature = (temperature == TEMPERATURE_ERROR_VALUE) ? READ_ERROR : String(temperature, 1) + TEMPERATURE_SIGN;
@@ -32,21 +36,20 @@ void Manager::convert_data_to_char_array_and_check_for_warning(const uint8_t& ge
         uint8_t str_len = str_data[i].length() + 1;    // +1 extra for null termination character
         char str_buffer[str_len];
         str_data[i].toCharArray(str_buffer, str_len);
-        strcpy(m_display_data[i], str_buffer);
+        strcpy(m_data_buffer[i], str_buffer);
     }
-
-    check_for_warning(battery_voltage, temperature);
 }
 
-void Manager::check_for_warning(const float& battery_voltage, const float& temperature)
+void Manager::check_warnings()
 {
-    m_warning_data[0] = (battery_voltage <= LOW_BATTERY_THRESHOLD || battery_voltage >= BATTERY_READ_ERORR_VALUE) ? true : false;
-    m_warning_data[1] = (temperature <= LOW_TEMPERATURE_THRESHOLD) ? true : false;
+    float battery_voltage = m_battery.voltage();
+    float temperature = m_temperature_sensor.temperature();
+
+    m_warning_data_buffer[0] = (battery_voltage <= LOW_BATTERY_THRESHOLD || battery_voltage >= BATTERY_READ_ERORR_VALUE) ? true : false;
+    m_warning_data_buffer[1] = (temperature <= LOW_TEMPERATURE_THRESHOLD) ? true : false;
 }
 
-void Manager::setup_port_registers()
-{
-}
+void Manager::setup_port_registers() {}
 
 void Manager::setup_adc_registers()
 {

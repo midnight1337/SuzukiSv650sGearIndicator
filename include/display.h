@@ -23,7 +23,7 @@ class Display
 
     public:
         Display();
-        void draw_data(const char* gear, const char* battery_voltage, const char* temperature, const bool& battery_warning, const bool& temperature_warning);
+        void draw_data(const char (&r_data_buffer)[3][8], const bool (&r_warning_data_buffer)[2]);
         void setup_display();
         void draw_startup_text();
 };
