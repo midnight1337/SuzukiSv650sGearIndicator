@@ -14,7 +14,7 @@ private:
     Gearbox m_gearbox{};
     TemperatureSensor m_temperature_sensor{};
     Display m_display{};
-    char m_data_buffer[3][8];  // 2D char array of arrays, 3 string arrays - 8 characters each
+    char m_data_buffer[3][6];  // 2D char array of arrays, 3 strings - 8 characters each
     bool m_warning_data_buffer[2];
 
     void convert_data();

@@ -1,13 +1,4 @@
 #include "../include/gearbox.h"
-/*
-1st: 1.36V
-2nd: 1.77V
-3rd: 2.49V
-4th: 3.23V
-5th: 4.10V
-6th: 4.55V
-N: 5.00V
- */
 
 enum GearsVoltageInMiliVolts
 {

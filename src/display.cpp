@@ -32,7 +32,7 @@ void Display::draw_startup_text()
     m_display.display();
 }
 
-void Display::draw_data(const char (&r_data_buffer)[3][8], const bool (&r_warning_data_buffer)[2])
+void Display::draw_data(const char (&r_data_buffer)[3][6], const bool (&r_warning_data_buffer)[2])
 {
     draw_battery_icon();
     draw_temperature_icon();
@@ -45,7 +45,7 @@ void Display::draw_data(const char (&r_data_buffer)[3][8], const bool (&r_warnin
     m_display.display();
 }
 
-void Display::draw_current_gear(const char* gear)
+void Display::draw_current_gear(const char (&gear)[6])
 {   
     m_display.setTextSize(7);
     m_display.setTextColor(WHITE, BLACK);
@@ -53,7 +53,7 @@ void Display::draw_current_gear(const char* gear)
     m_display.println(gear);
 }
 
-void Display::draw_battery_voltage(const char* battery_voltage)
+void Display::draw_battery_voltage(const char (&battery_voltage)[6])
 {   
     clear_part_of_display(68, 18, 100, 30);
     m_display.setTextSize(2);
@@ -62,7 +62,7 @@ void Display::draw_battery_voltage(const char* battery_voltage)
     m_display.println(battery_voltage);
 }
 
-void Display::draw_temperature(const char* temperature)
+void Display::draw_temperature(const char (&temperature)[6])
 {   
     clear_part_of_display(68, 44, 100, 30);
     m_display.setTextSize(2);
@@ -93,7 +93,7 @@ void Display::draw_temperature_icon()
     m_display.println(TEMPERATURE_TITLE);
 }
 
-void Display::draw_battery_warning_icon(const bool& battery_warning)
+void Display::draw_battery_warning_icon(const bool (&battery_warning))
 {
     if (!battery_warning)
     {
@@ -109,7 +109,7 @@ void Display::draw_battery_warning_icon(const bool& battery_warning)
     m_display.drawLine(65 + 55, 7, 65 + 55, 11, WHITE);     // + . |
 }
 
-void Display::draw_temperature_warning_icon(const bool& temperature_warning)
+void Display::draw_temperature_warning_icon(const bool (&temperature_warning))
 {
     if (!temperature_warning)
     {
@@ -124,7 +124,7 @@ void Display::draw_temperature_warning_icon(const bool& temperature_warning)
 }
 
 /* It's necessary to clear part of screen of changing data as battery voltage or ambient temperature*/
-void Display::clear_part_of_display(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
+void Display::clear_part_of_display(uint8_t x, uint8_t y, uint8_t width, uint8_t height)
 {
     m_display.fillRect(x, y, width, height, BLACK);
 }
