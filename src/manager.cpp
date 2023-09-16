@@ -30,7 +30,9 @@ void Manager::convert_data()
     String convert_temperature = (temperature == TEMPERATURE_ERROR_VALUE) ? READ_ERROR : String(temperature, 1) + TEMPERATURE_SIGN;
 
     String str_data[3] = {convert_gear, convert_battery_voltage, convert_temperature};
-    
+
+    //dtostrf();    // float to char array
+
     for (uint8_t i = 0; i < 3; i++)
     {
         uint8_t str_len = str_data[i].length() + 1;    // +1 extra for null termination character
@@ -53,10 +55,41 @@ void Manager::setup_port_registers() {}
 
 void Manager::setup_adc_registers()
 {
-    // ADCSRA = bit(ADEN);                             // turn ADC on
-    // ADCSRA |= bit(ADPS0) | bit(ADPS1) | bit(ADPS2); // Prescaler of 128
-    // ADMUX = bit(REFS0) | (adcPin & 0x07);           // AVcc and select input port
+    /*
+    ADMUX (ADC Multiplexer Selection Register)
+    ADLAR bti - Left(1)/Right(0) ADC result allignment -> ADC = MSB + LSB 00000010 + 00111101, ADC result is 16 bit but stored in 10 bits
+    REFS[1:0] bit - Reference voltage source
+    MUX[2:1:0] bit - Select which Analog channel is set as input
+
+    ADCSRA (ADC Control and Status Register A): This register controls the ADC's enabling and starting conversions.
+    ADEN bit - Enable/Disable ADC
+    ADSC bit - Start conversion
+    ADATE bit - Enable/Disable auto trigger, disabling requires using ADSC each time sample is needed
+    ADPS[2:1:0] bit - Prescaler, Sets division factor for ADC clock
+    */
+    ADMUX |= (0 << ADLAR);
+    ADMUX |= (0 << REFS1) | (1 << REFS0);
+    //ADMUX |= (0 << MUX2) | (0 << MUX1) | (1 << MUX0);
+    
+    ADCSRA |= (1 << ADEN);
+    //ADCSRA |= (1 << ADSC);
+    ADCSRA |= (0 << ADATE);
+    ADCSRA |= (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2); // set ADC clock prescaler of 128: 16mHz/128=125kHz -> 125KHz/13 = 9.61KHz sampling rate
+    
+    ADCSRB = 0;
+    //DIDR0 = B00000001;
 }
 
+// void Manager::setup_isr_registers()
+// {
+//     /*
+//     Rejestr PCICR - Pin CHange Interrupt Control Register
+//     PCIE1 bit conls Group 1 which is Analog pins PCINT8-13 (A0-A5)
 
-
+//     PCMSKx - Pin change mask register (logiczne 0 i 1 na bicie ktry odpowiada za pin przerywającu)
+//     PCINTx - Enable/Disable trigger interrupt  
+//     */
+//     PCICR |= 00000010;  // enable pin change interrupts for A0 to A5
+//     PCMSK1 |= bit (PCINT9);  // |= 00000010, A1 will trigger interrupt each time value read is changed
+//     PCIFR  |= bit (PCIF1);   // clear any outstanding interrupts
+// }

@@ -26,6 +26,7 @@ public:
     void setup();
     void setup_port_registers();
     void setup_adc_registers();
+    void setup_isr_registers();
 };
 
 #endif

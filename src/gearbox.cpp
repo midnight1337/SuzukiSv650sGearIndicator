@@ -45,7 +45,10 @@ void Gearbox::read_gear()
 
 void Gearbox::read_gear_voltage_from_gearbox()
 {
-    int adc_value = analogRead(GEARBOX_PIN);
+    ADMUX |= (1 << MUX0);   // Select ADC channel to pin A1
+    ADCSRA |= (1 << ADSC);  // Start conversion
+    while (ADCSRA & (1 << ADSC));   // Wait for conversion to complete
+    int adc_value = ADC; //analogRead(GEARBOX_PIN);
     m_gear_voltage = convert_adc_value_to_voltage(adc_value);
 }
 

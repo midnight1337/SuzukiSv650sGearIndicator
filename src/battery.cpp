@@ -9,7 +9,10 @@ float Battery::voltage()
 
 void Battery::read_voltage()
 {
-    int adc_value = analogRead(BATTERY_PIN);
+    ADMUX &= 0b11111000;     // Select ADC channel to pin A0
+    ADCSRA |= (1 << ADSC);   // Start conversion
+    while (ADCSRA & (1 << ADSC));    // Wait for conversion to complete
+    int adc_value = ADC; // Read ADC value//analogRead(BATTERY_PIN);
     m_voltage = convert_adc_value_to_voltage(adc_value);
 }
 

@@ -5,7 +5,7 @@ Date:
 
 TODO:
 -ISR on gearbox pin, add threshold to determining gears, check debouncing by changing gear in motorbike
--ADC registers etc
+-bitwise operators in ADC registers
 */
 #include <Arduino.h>
 #include "manager.h"
@@ -15,9 +15,10 @@ int main()
 {
   init();
   Serial.begin(115200);
-  
+
   Manager manager{};
   manager.setup();
+  manager.setup_adc_registers();
 
   while (true)
   {
@@ -26,12 +27,10 @@ int main()
   }
 }
 
-// volatile int adcReading;
-// volatile boolean adcDone;
-
 // ISR (ADC_vect)
-//   {
-/* Comparator interrupt for comparing a analog input voltage that determines gear change*/
-//   adcReading = ADC;
-//   adcDone = true;
-//   }  // end of ADC_vect
+// {
+//   /*
+//   Interrupt Service Routine
+//   */
+//  Serial.println("interrupt doesn't work sheesh");
+// }
