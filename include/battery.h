@@ -1,20 +1,20 @@
 #include <Arduino.h>
 #include "defined_variables.h"
+#include <abc_adc.h>
 
 #ifndef BATTERY_H
 #define BATTERY_H
 
-class Battery
+class Battery: public AbcADC
 {
-private:
-    float m_voltage;
+    private:
+        float m_source_voltage;
+        void calculate_source_voltage();
 
-    float convert_adc_value_to_voltage(const int& adc_value);
-
-public:
-    Battery();
-    float voltage();
-    void read_voltage();
+    public:
+        Battery();
+        void read_voltage();
+        float voltage(); 
 };
 
 #endif

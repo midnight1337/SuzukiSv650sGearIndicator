@@ -31,8 +31,6 @@ void Manager::convert_data()
 
     String str_data[3] = {convert_gear, convert_battery_voltage, convert_temperature};
 
-    //dtostrf();    // float to char array
-
     for (uint8_t i = 0; i < 3; i++)
     {
         uint8_t str_len = str_data[i].length() + 1;    // +1 extra for null termination character
@@ -66,6 +64,10 @@ void Manager::setup_adc_registers()
     ADSC bit - Start conversion
     ADATE bit - Enable/Disable auto trigger, disabling requires using ADSC each time sample is needed
     ADPS[2:1:0] bit - Prescaler, Sets division factor for ADC clock
+
+    ADCSRB:
+
+    DIDR0:
     */
     ADMUX |= (0 << ADLAR);
     ADMUX |= (0 << REFS1) | (1 << REFS0);

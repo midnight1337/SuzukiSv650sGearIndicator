@@ -1,22 +1,19 @@
 #include "defined_variables.h"
+#include <abc_adc.h>
 
 #ifndef GEARBOX_H
 #define GEARBOX_H
 
-class Gearbox
+class Gearbox: public AbcADC
 {
 private:
     uint8_t m_gear;
     float m_gear_voltage;
-
-    void read_gear_voltage_from_gearbox();
-    float convert_adc_value_to_voltage(const int& adc_value);
     void determine_gear();
 
 public:
     Gearbox();
     uint8_t gear();
-    float gear_voltage();
     void read_gear();
 };
 
