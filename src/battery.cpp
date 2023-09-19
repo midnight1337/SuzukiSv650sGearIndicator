@@ -6,7 +6,7 @@ float Battery::voltage() {return m_source_voltage;}
 
 void Battery::read_voltage()
 {
-    read_samples(0);
+    read_samples(BATTERY_MUX_CHANNEL);
     convert_samples_to_voltage();
     calculate_source_voltage();
 }

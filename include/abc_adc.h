@@ -11,6 +11,7 @@ class AbcADC
         float m_voltage;
         virtual void read_samples(const uint8_t mux_channel);
         virtual void convert_samples_to_voltage();
+        // virtual ~AbcADC() = 0;
 };
 
 #endif

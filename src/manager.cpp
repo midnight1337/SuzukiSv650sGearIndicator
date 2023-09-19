@@ -57,7 +57,7 @@ void Manager::setup_adc_registers()
     ADMUX (ADC Multiplexer Selection Register)
     ADLAR bti - Left(1)/Right(0) ADC result allignment -> ADC = MSB + LSB 00000010 + 00111101, ADC result is 16 bit but stored in 10 bits
     REFS[1:0] bit - Reference voltage source
-    MUX[2:1:0] bit - Select which Analog channel is set as input
+    MUX[2:1:0] bit - Select which Analog channel is set as input for sample conversion
 
     ADCSRA (ADC Control and Status Register A): This register controls the ADC's enabling and starting conversions.
     ADEN bit - Enable/Disable ADC
@@ -65,9 +65,9 @@ void Manager::setup_adc_registers()
     ADATE bit - Enable/Disable auto trigger, disabling requires using ADSC each time sample is needed
     ADPS[2:1:0] bit - Prescaler, Sets division factor for ADC clock
 
-    ADCSRB:
+    ADCSRB (ADC Control and Status Register B): related do ADCSRA, TIMERs, choosing trigger source (free running or comparator)
 
-    DIDR0:
+    DIDR0 (Digital Input Disable Register 0): Disable/Enable  Analog channel used as digital buffer
     */
     ADMUX |= (0 << ADLAR);
     ADMUX |= (0 << REFS1) | (1 << REFS0);
@@ -79,7 +79,7 @@ void Manager::setup_adc_registers()
     ADCSRA |= (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2); // set ADC clock prescaler of 128: 16mHz/128=125kHz -> 125KHz/13 = 9.61KHz sampling rate
     
     ADCSRB = 0;
-    //DIDR0 = B00000001;
+    DIDR0 = B11111111;
 }
 
 // void Manager::setup_isr_registers()

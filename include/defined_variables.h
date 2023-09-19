@@ -5,9 +5,12 @@
 
 #define DS18B20_ONE_WIRE_PIN 2
 #define BATTERY_PIN A0
+#define BATTERY_MUX_CHANNEL 0U
 #define GEARBOX_PIN A1
+#define GEARBOX_MUX_CHANNEL 1U
 
 #define BATTERRY_LOW_LEVEL 12
+#define GEARBOX_INDETERMINATE_VOLTAGE_IN_MV 50
 
 #define SCREEN_WIDTH 128U // OLED display width, in pixels
 #define SCREEN_HEIGHT 64U // OLED display height, in pixels
@@ -36,6 +39,6 @@
 
 #define TEMPERATURE_ERROR_VALUE -273
 #define GEAR_NEUTRAL_VALUE 0U
-#define BATTERY_READ_ERORR_VALUE 20U
+#define BATTERY_READ_ERORR_VALUE 12U
 
 #endif
