@@ -2,15 +2,14 @@
 
 // AbcADC::~AbcADC() {}
 
-void AbcADC::read_samples(const uint8_t mux_channel)
+void AbcADC::read_samples(const uint8_t& mux_channel)
 {
     switch (mux_channel)
     {
-        case 0:
-            // ADMUX &= 0b11111000; // Select ADC channel to pin A0
+        case BATTERY_MUX_CHANNEL:
             ADMUX &= ~(1 << MUX0) & ~(1 << MUX1) & ~(1 << MUX2);    // &= ~() -> set to 0 only selected bit, leave rest of register untouched
             break;
-        case 1:
+        case GEARBOX_MUX_CHANNEL:
             ADMUX |= (1 << MUX0);   // Select ADC channel to pin A1
             break;
         default:
@@ -19,7 +18,7 @@ void AbcADC::read_samples(const uint8_t mux_channel)
     
     ADCSRA |= (1 << ADSC);   // Start conversion
     while (ADCSRA & (1 << ADSC));    // Wait for conversion to complete
-    m_samples = ADC; // Read ADC value//analogRead(BATTERY_PIN);
+    m_samples = ADC; // Read ADC value
 }
 
 void AbcADC::convert_samples_to_voltage()

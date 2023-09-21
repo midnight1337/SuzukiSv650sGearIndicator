@@ -24,9 +24,9 @@ void Manager::convert_data()
     uint8_t gear = m_gearbox.gear();
     float battery_voltage = m_battery.voltage();
     float temperature = m_temperature_sensor.temperature();
-
+    
     String convert_gear = (gear == GEAR_NEUTRAL_VALUE) ? GEAR_N : String(gear);
-    String convert_battery_voltage = (battery_voltage > BATTERY_READ_ERORR_VALUE) ? READ_ERROR : String(battery_voltage, 1) + VOLTAGE_SIGN;
+    String convert_battery_voltage = (battery_voltage == 0) ? READ_ERROR : String(battery_voltage, 1) + VOLTAGE_SIGN;
     String convert_temperature = (temperature == TEMPERATURE_ERROR_VALUE) ? READ_ERROR : String(temperature, 1) + TEMPERATURE_SIGN;
 
     String str_data[3] = {convert_gear, convert_battery_voltage, convert_temperature};
@@ -45,7 +45,7 @@ void Manager::check_warnings()
     float battery_voltage = m_battery.voltage();
     float temperature = m_temperature_sensor.temperature();
 
-    m_warning_data_buffer[0] = (battery_voltage <= LOW_BATTERY_THRESHOLD || battery_voltage >= BATTERY_READ_ERORR_VALUE) ? true : false;
+    m_warning_data_buffer[0] = (battery_voltage <= LOW_BATTERY_THRESHOLD) ? true : false;
     m_warning_data_buffer[1] = (temperature <= LOW_TEMPERATURE_THRESHOLD) ? true : false;
 }
 
@@ -81,17 +81,3 @@ void Manager::setup_adc_registers()
     ADCSRB = 0;
     DIDR0 = B11111111;
 }
-
-// void Manager::setup_isr_registers()
-// {
-//     /*
-//     Rejestr PCICR - Pin CHange Interrupt Control Register
-//     PCIE1 bit conls Group 1 which is Analog pins PCINT8-13 (A0-A5)
-
-//     PCMSKx - Pin change mask register (logiczne 0 i 1 na bicie ktry odpowiada za pin przerywającu)
-//     PCINTx - Enable/Disable trigger interrupt  
-//     */
-//     PCICR |= 00000010;  // enable pin change interrupts for A0 to A5
-//     PCMSK1 |= bit (PCINT9);  // |= 00000010, A1 will trigger interrupt each time value read is changed
-//     PCIFR  |= bit (PCIF1);   // clear any outstanding interrupts
-// }

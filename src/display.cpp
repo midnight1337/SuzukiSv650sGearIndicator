@@ -22,7 +22,7 @@ void Display::draw_startup_text()
     m_display.setCursor(24, 24);
     m_display.println(SUZUKI_TITLE);
     m_display.setCursor(6, 32);
-    m_display.println(GITHUB);
+    m_display.println(GITHUB_TEXT);
 
     m_display.display();
 
