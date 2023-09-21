@@ -2,9 +2,6 @@
 Title: Suzuki SV650S gear indicator
 Author: midnight1337
 Date:
-
-TODO:
--ISR on gearbox pin, add threshold to determining gears, check debouncing by changing gear in motorbike - https://www.youtube.com/watch?v=0vRF8Ce9umE
 */
 #include <Arduino.h>
 #include "manager.h"
