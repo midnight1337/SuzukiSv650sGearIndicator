@@ -2,14 +2,10 @@
 
 ## Overview
 
-Suzuki Gear Indicator module is a project designed especially for my motorbike Suzuki SV650S K8 that displays:
+Suzuki Gear Indicator module is a project designed especially for my motorbike Suzuki SV650S K8 that is able to display:
 - Current gear
 - Ambient temperature
 - Motorbike battery voltage
-
-It also contains a:
-- TRE modification (Transmission Retard Elimination) that can be switched on and off
-- Phone charger module
 
 Circuit is designed to be surface mounted on single side PCB. Module is basicaly plug&play as it contains plugs that can be attached to Motorbike ECU.
 
@@ -36,22 +32,22 @@ Circuit is designed to be surface mounted on single side PCB. Module is basicaly
 ### Others
 
 1. Japanese Sumitomo 4 way Connector
-2. SPST switch
 
 ## Schematic
-
-Coming soon
-
-
+...
 
 
 ## Project documentation
 
-### First working prototype
-![Prototype](/pictures/prototype.jpeg)
+### 1. Reading current gear
+Microcontroller module is connected into motorbike GPS (Gear Posistion System) plug, which is capable to read current gear by measuring voltage read on GPS. Then by using simple algorithms, voltage is converted into readable data so gear is displayed.
 
-Gaer voltage measured directly from ECU pinout
+schematic here <-->
 
+### 2. Reading battery voltage
+Battery voltage is read simply via voltage divider, not using this approach would damage microcontroller as battery working voltage is more than 14V. Simmilar as above, using simple algorithms we can read our source voltage and display it.
+
+Gaer voltage measured directly from GPS pinout: <br />
 1st: 1.36V <br />
 2nd: 1.77V <br />
 3rd: 2.49V <br />
@@ -60,6 +56,22 @@ Gaer voltage measured directly from ECU pinout
 6th: 4.55V <br />
 N: 5.00V <br />
 
-### How does a TRE works
+schematic here <-->
 
-Here is explenation
+### 3. Reading temperature
+Not much to add here, I use simple DS18B20 temperature sensor.
+
+
+### 4. How does microcontroller reads data?
+My program uses a registers to read Analog data for gears and battery.
+I manipulate ADMUX and ADCSRA registers in order to read particular data.
+
+schematic here <-->
+
+
+### First working prototype
+![Prototype](/pictures/prototype.jpeg)
+
+When voltage goes below threshold, there is yellow notification displayed. Simmilar with temperature, if it goes below temperature considered as safe to ride, then it displays warning.
+
+photo here <-->
