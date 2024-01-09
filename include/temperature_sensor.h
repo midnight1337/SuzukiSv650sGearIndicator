@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <OneWire.h>
 #include <DS18B20.h>
-#include "defined_variables.h"
+#include "hardware_variables.h"
 
 #ifndef TEMPERATURE_SENSOR_H
 #define TEMPERATURE_SENSOR_H

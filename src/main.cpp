@@ -1,10 +1,11 @@
-/*
-Title: Suzuki SV650S gear indicator
-Author: midnight1337
-Date:
+/**
+ * @title: Suzuki SV650S Gear Indicator
+ * @author midnight1337
+ * @brief Gear Indicator module for SV650S Motorbike, abiility to read gears, ambient temperature and battery voltage.
+ * date: 21-09-2023
 */
 #include <Arduino.h>
-#include "manager.h"
+#include "../include/manager.h"
 
 
 int main()
@@ -22,11 +23,3 @@ int main()
     delay(MAIN_LOOP_TIME);
   }
 }
-
-// ISR (ADC_vect)
-// {
-//   /*
-//   Interrupt Service Routine
-//   */
-//  Serial.println("interrupt doesn't work sheesh");
-// }

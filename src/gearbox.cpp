@@ -1,19 +1,8 @@
 #include "../include/gearbox.h"
 
-enum GearsVoltage
-{
-    first = 136,
-    second = 177,
-    third = 249,
-    fourth = 323,
-    fifth = 410,
-    sixth = 455,
-    neutral = 500
-};
-
 Gearbox::Gearbox(): m_gear(0) {}
 
-uint8_t Gearbox::gear() {return m_gear;}
+uint8_t Gearbox::gear() { return m_gear; }
 
 void Gearbox::read_gear()
 {
@@ -24,7 +13,7 @@ void Gearbox::read_gear()
 
 void Gearbox::determine_gear()
 {   
-    int gear_voltage = int(m_voltage * 100); // gear voltage in: [V * 100]
+    uint16_t gear_voltage = int(m_voltage * 100); // gear voltage unit is: [mV], as we multiply voltage by 100
 
     if (gear_voltage <= GEARBOX_INDETERMINATE_VOLTAGE)
     {

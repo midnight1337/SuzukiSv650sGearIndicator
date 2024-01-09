@@ -17,14 +17,13 @@ private:
     char m_data_buffer[3][6];
     bool m_warning_data_buffer[2];
 
-    void convert_data();
+    void buffer_data_for_display();
     void check_warnings();
 
 public:
     Manager();
     void run();
     void setup();
-    void setup_port_registers();
     void setup_adc_registers();
 };
 

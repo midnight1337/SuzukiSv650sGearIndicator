@@ -1,8 +1,8 @@
-#include <abc_adc.h>
+#include <../include/base_adc.h>
 
-// AbcADC::~AbcADC() {}
+// BaseADC::~BaseADC() {}
 
-void AbcADC::read_samples(const uint8_t& mux_channel)
+void BaseADC::read_samples(const uint8_t& mux_channel)
 {
     switch (mux_channel)
     {
@@ -21,7 +21,7 @@ void AbcADC::read_samples(const uint8_t& mux_channel)
     m_samples = ADC; // Read ADC value
 }
 
-void AbcADC::convert_samples_to_voltage()
+void BaseADC::convert_samples_to_voltage()
 {
     m_voltage = (m_samples *  VCC) / MAX_SAMPLES;
 }

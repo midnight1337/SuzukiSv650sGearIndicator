@@ -7,7 +7,7 @@ void Manager::run()
     m_gearbox.read_gear();
     m_battery.read_voltage();
     m_temperature_sensor.read_temperature();
-    convert_data();
+    buffer_data_for_display();
     check_warnings();
     m_display.draw_data(m_data_buffer, m_warning_data_buffer);
 }
@@ -19,7 +19,7 @@ void Manager::setup()
     m_display.draw_startup_text();
 }
 
-void Manager::convert_data()
+void Manager::buffer_data_for_display()
 {
     uint8_t gear = m_gearbox.gear();
     float battery_voltage = m_battery.voltage();
@@ -49,26 +49,25 @@ void Manager::check_warnings()
     m_warning_data_buffer[1] = (temperature <= LOW_TEMPERATURE_THRESHOLD) ? true : false;
 }
 
-void Manager::setup_port_registers() {}
-
 void Manager::setup_adc_registers()
 {
     /*
-    ADMUX (ADC Multiplexer Selection Register)
-    ADLAR bti - Left(1)/Right(0) ADC result allignment -> ADC = MSB + LSB 00000010 + 00111101, ADC result is 16 bit but stored in 10 bits
-    REFS[1:0] bit - Reference voltage source
-    MUX[2:1:0] bit - Select which Analog channel is set as input for sample conversion
+    ADMUX (ADC Multiplexer Selection Register). Register bits:
+    -ADLAR - Left(1)/Right(0) ADC result allignment -> ADC = MSB + LSB 00000010 + 00111101, ADC result is 16 bit but stored in 10 bits
+    -REFS[1:0] - Reference voltage source
+    -MUX[2:1:0] - Select which Analog channel is set as input for sample conversion
 
-    ADCSRA (ADC Control and Status Register A): This register controls the ADC's enabling and starting conversions.
-    ADEN bit - Enable/Disable ADC
-    ADSC bit - Start conversion
-    ADATE bit - Enable/Disable auto trigger, disabling requires using ADSC each time sample is needed
-    ADPS[2:1:0] bit - Prescaler, Sets division factor for ADC clock
+    ADCSRA (ADC Control and Status Register A): This register controls the ADC's enabling and starting conversions. Register bits:
+    -ADEN - Enable/Disable ADC
+    -ADSC - Start conversion
+    -ADATE - Enable/Disable auto trigger, disabling requires using ADSC each time sample is needed
+    -ADPS[2:1:0] - Prescaler, Sets division factor for ADC clock
 
     ADCSRB (ADC Control and Status Register B): related do ADCSRA, TIMERs, choosing trigger source (free running or comparator)
 
     DIDR0 (Digital Input Disable Register 0): Disable/Enable  Analog channel used as digital buffer
     */
+
     ADMUX |= (0 << ADLAR);
     ADMUX |= (0 << REFS1) | (1 << REFS0);
     //ADMUX |= (0 << MUX2) | (0 << MUX1) | (1 << MUX0);

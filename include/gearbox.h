@@ -1,10 +1,10 @@
-#include "defined_variables.h"
-#include <abc_adc.h>
+#include "hardware_variables.h"
+#include "base_adc.h"
 
 #ifndef GEARBOX_H
 #define GEARBOX_H
 
-class Gearbox: public AbcADC
+class Gearbox: public BaseADC
 {
 private:
     uint8_t m_gear;

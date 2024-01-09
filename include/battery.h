@@ -1,11 +1,11 @@
 #include <Arduino.h>
-#include "defined_variables.h"
-#include <abc_adc.h>
+#include "hardware_variables.h"
+#include "base_adc.h"
 
 #ifndef BATTERY_H
 #define BATTERY_H
 
-class Battery: public AbcADC
+class Battery: public BaseADC
 {
     private:
         float m_source_voltage;

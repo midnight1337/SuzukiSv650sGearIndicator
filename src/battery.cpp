@@ -2,7 +2,7 @@
 
 Battery::Battery() {}
 
-float Battery::voltage() {return m_source_voltage;} 
+float Battery::voltage() { return m_source_voltage; } 
 
 void Battery::read_voltage()
 {

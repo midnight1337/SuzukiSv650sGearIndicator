@@ -1,17 +1,17 @@
 #include <Arduino.h>
-#include <defined_variables.h>
+#include <hardware_variables.h>
 
-#ifndef ADC_H
-#define ADC_H
+#ifndef BASE_ADC_H
+#define BASE_ADC_H
 
-class AbcADC
+class BaseADC
 {
     protected:
         int m_samples;
         float m_voltage;
         virtual void read_samples(const uint8_t& mux_channel);
         virtual void convert_samples_to_voltage();
-        // virtual ~AbcADC() = 0;
+        // virtual ~BaseADC() = 0;
 };
 
 #endif
